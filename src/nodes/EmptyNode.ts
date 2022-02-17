@@ -1,6 +1,7 @@
-import { Empty, Node, NodeType } from './types';
-import { NOTHING } from './constants';
-import { LeafNode } from './LeafNode';
+import {Empty, Node, NodeType} from './types';
+import {NOTHING} from './constants';
+
+// import { LeafNode } from './LeafNode';
 
 export class EmptyNode<K, V> implements Empty<K, V> {
   public type: NodeType.EMPTY = NodeType.EMPTY;
@@ -18,7 +19,7 @@ export class EmptyNode<K, V> implements Empty<K, V> {
 
     ++size.value;
 
-    return new LeafNode(hash, key, value);
+    return { type: NodeType.LEAF, hash, key, value };
   }
 }
 

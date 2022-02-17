@@ -27,7 +27,7 @@ export interface Leaf<K, V> {
   hash: number;
   key: K;
   value: V;
-  modify: Modify<K, V>;
+  // modify: Modify<K, V>;
 }
 
 export interface Collision<K, V> {

@@ -10,6 +10,7 @@ import {
   insert,
   replace,
 } from '../../common';
+import { modifyLeafNode, modifyNode } from '../LeafNode';
 import { toArrayNode } from './toArrayNode';
 
 export class IndexedNode<K, V> implements Indexed<K, V> {
@@ -35,7 +36,7 @@ export class IndexedNode<K, V> implements Indexed<K, V> {
     const index: number = bitmapToIndex(mask, bit);
     const exists: boolean = Boolean(mask & bit);
     const current: Node<K, V> = exists ? children[index] : empty<K, V>();
-    const child = current.modify(shift + SIZE, get, hash, key, size) as ChildNode<K, V>;
+    const child = modifyNode(current, shift + SIZE, get, hash, key, size) as ChildNode<K, V>;
 
     if (current === child)
       return this;

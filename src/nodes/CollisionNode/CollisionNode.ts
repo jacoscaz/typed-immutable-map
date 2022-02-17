@@ -1,15 +1,15 @@
-import { Collision, NodeType, Node } from '../types';
-import { NOTHING } from '../constants';
-import { LeafNode, combineLeafNodes } from '../LeafNode';
-import { newCollisionList } from './newCollisionList';
+import {Collision, Leaf, Node, NodeType} from '../types';
+import {NOTHING} from '../constants';
+import {combineLeafNodes} from '../LeafNode';
+import {newCollisionList} from './newCollisionList';
 
 export class CollisionNode<K, V> implements Collision<K, V> {
   public type: NodeType.COLLISION = NodeType.COLLISION;
 
   public hash: number;
-  public children: Array<LeafNode<K, V>>;
+  public children: Array<Leaf<K, V>>;
 
-  constructor(hash: number, children: Array<LeafNode<K, V>>) {
+  constructor(hash: number, children: Array<Leaf<K, V>>) {
     this.hash = hash;
     this.children = children;
   }
@@ -22,7 +22,7 @@ export class CollisionNode<K, V> implements Collision<K, V> {
     size: { value: number }): Node<K, V>
   {
     if (hash === this.hash) {
-      const list: Array<LeafNode<K, V>> =
+      const list: Array<Leaf<K, V>> =
         newCollisionList(this.hash, this.children, get, key, size);
 
       if (list === this.children)
@@ -40,6 +40,6 @@ export class CollisionNode<K, V> implements Collision<K, V> {
 
     ++size.value;
 
-    return combineLeafNodes(shift, this.hash, this as any, hash, new LeafNode(hash, key, value));
+    return combineLeafNodes(shift, this.hash, this as any, hash, { type: NodeType.LEAF, hash, key, value });
   }
 }

@@ -1,5 +1,5 @@
 
-import { Node, NodeType, LeafNode, IndexedNode, ArrayNode } from '../../nodes';
+import { Node, NodeType, IndexedNode, ArrayNode, Leaf } from '../../nodes';
 import { SIZE, hashFragment, toBitmap, bitmapToIndex } from '../../common';
 import { HashMap } from './../HashMap';
 import { getNode } from './getNode';
@@ -20,8 +20,8 @@ export function getHash<K, V, R>(
 
   while (true) switch (node.type) {
     case NodeType.LEAF:
-      return keyEquals(key, (node as LeafNode<K, V>).key)
-        ? (node as LeafNode<K, V>).value
+      return keyEquals(key, (node as Leaf<K, V>).key)
+        ? (node as Leaf<K, V>).value
         : defaultValue;
 
     case NodeType.COLLISION: {
@@ -29,7 +29,7 @@ export function getHash<K, V, R>(
         const children = node.children;
 
         for (let i = 0; i < children.length; ++i) {
-          const child = children[i] as LeafNode<K, V>;
+          const child = children[i] as Leaf<K, V>;
 
           if (keyEquals(key, child.key))
             return child.value;

@@ -1,4 +1,4 @@
-import { Node } from '../../nodes';
+import {modifyNode, Node} from '../../nodes';
 import { HashMap } from '../HashMap';
 import { findHash } from './findHash';
 import { getNode } from './getNode';
@@ -16,7 +16,7 @@ export function setKeyValue<K, V>(
 
   const size = { value: getSize(map) };
 
-  const newNode: Node<K, V> = getNode(map).modify(0, constant(value), hash, key, size);
+  const newNode: Node<K, V> = modifyNode(getNode(map), 0, constant(value), hash, key, size);
 
   return setTree<K, V>(newNode, size.value, map);
 }

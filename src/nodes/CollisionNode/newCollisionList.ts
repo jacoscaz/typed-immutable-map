@@ -1,13 +1,14 @@
-import { NOTHING } from '../constants';
-import { LeafNode } from '../LeafNode';
-import { remove, insert } from '../../common';
+import {NOTHING} from '../constants';
+// import { LeafNode } from '../LeafNode';
+import {insert, remove} from '../../common';
+import {Leaf, NodeType} from '../types';
 
 export function newCollisionList<K, V>(
   hash: number,
-  list: Array<LeafNode<K, V>>,
+  list: Array<Leaf<K, V>>,
   get: (value?: V) => V,
   key: K,
-  size: { value: number }): Array<LeafNode<K, V>>
+  size: { value: number }): Array<Leaf<K, V>>
 {
   const length = list.length;
 
@@ -26,7 +27,7 @@ export function newCollisionList<K, V>(
         return remove(i, list);
       }
 
-      return insert(i, new LeafNode(hash, key, newValue), list);
+      return insert(i, { type: NodeType.LEAF, hash, key, value: newValue }, list);
     }
   }
 
@@ -37,5 +38,5 @@ export function newCollisionList<K, V>(
 
   ++size.value;
 
-  return insert(length, new LeafNode(hash, key, newValue), list);
+  return insert(length, { type: NodeType.LEAF, hash, key, value: newValue }, list);
 }

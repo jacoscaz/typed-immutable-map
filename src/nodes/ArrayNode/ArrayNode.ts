@@ -1,5 +1,6 @@
 import { NodeType, ListNode, Node } from '../types';
 import { empty } from '../EmptyNode';
+import { modifyNode } from '../LeafNode';
 import { SIZE, MIN_ARRAY_NODE, replace, hashFragment } from '../../common';
 import { toIndexNode } from './toIndexNode';
 
@@ -24,7 +25,7 @@ export class ArrayNode<K, V> implements ListNode<K, V> {
     const fragment = hashFragment(shift, hash);
     const child = children[fragment];
     const newChild =
-      (child || empty<K, V>()).modify(shift + SIZE, get, hash, key, size);
+      modifyNode(child || empty<K, V>(), shift + SIZE, get, hash, key, size);
 
     if (child === newChild)
       return this;
