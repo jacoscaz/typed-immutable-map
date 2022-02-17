@@ -92,9 +92,9 @@ const a = set('a', 1, map);
 console.log(get('a', a)) // 1
 ```
 
-#### `get<K, V>(key: K, map: HashMap<K, V>): V | null`
+#### `get<K, V>(key: K, map: HashMap<K, V>): V | undefined`
 
-Attempts to find a value in a given HashMap. Returns `null` if none can be found.
+Attempts to find a value in a given HashMap. Returns `undefined` if none can be found.
 
 ```typescript
 import { set, get, empty } from '@typed/hashmap';
@@ -113,12 +113,9 @@ Returns true if a map contains a particular key and false if it does not.
 ```typescript
 import { empty, has, set } from '@typed/hashmap';
 
-const hasA = has('a');
-
-const map = empty<string, number>();
-
-hasA(map) // false
-hasA(set('a', 1, map)) // true
+let map = empty<string, number>();
+map = set('a', 1, map);
+has('a', map) // true
 ```
 
 #### `size<K, V>(map: HashMap<K, V>): number`
