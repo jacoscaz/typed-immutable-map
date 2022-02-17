@@ -1,6 +1,6 @@
 {
   "name": "typed-immutable-map",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0",
   "description": "Immutable, HAMT-based Hash Map in TypeScript",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
