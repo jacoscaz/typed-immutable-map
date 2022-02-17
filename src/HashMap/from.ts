@@ -11,7 +11,7 @@ export function fromIterable<K, V>(iterable: Iterable<[K, V]>): HashMap<K, V> {
   return map;
 }
 
-export function fromObject<K extends string, V>(object: Record<K, V>): HashMap<K, V> {
+export function fromObject<K extends string | number | symbol, V>(object: Record<K, V>): HashMap<K, V> {
   let map = empty<K, V>();
   for (let key in object) {
     if (object.hasOwnProperty(key)) {
