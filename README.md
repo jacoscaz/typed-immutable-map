@@ -4,18 +4,21 @@
 
 A fast and persistent (immutable) Hash Array Map Trie for TypeScript.
 
-This is heavily based off of the deprecated [@typed/hashmap][1], which in turn
-was based off of [hamt][2].
+This is heavily based off of the deprecated [@typed/hashmap][i1], which in turn
+was based off of [hamt][i2]. Although having a different API, it can be used as
+an alternative to [Immutable's `Map`][i3].
 
-[1]: https://github.com/TylorS/typed-hashmap
-[2]: https://github.com/mattbierner/hamt
-
-Features: 
+## Features 
 
 - keys can be of any type, including objects or arrays, much like ES2015 `Map`s
-- all methods are implemented as static methods, with zero usage of prototypes, 
-  so that they can be imported separately for smaller bundles
+- all pieces of functionality are implemented as separate functions, with zero
+  usage of prototypes, and can be imported/required independently of one
+  another
 - zero dependencies
+
+[i1]: https://github.com/TylorS/typed-hashmap
+[i2]: https://github.com/mattbierner/hamt
+[i3]: https://immutable-js.com/docs/v4.0.0/Map/
 
 ## API
 
