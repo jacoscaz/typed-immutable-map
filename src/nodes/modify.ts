@@ -3,6 +3,7 @@ import {modifyLeaf} from './LeafNode';
 import {modifyEmpty} from './EmptyNode';
 import {modifyListNode} from './ArrayNode';
 import {modifyIndexedNode} from './IndexedNode';
+import {modifyCollisionNode} from './CollisionNode';
 
 export function modify<K, V>(
   node: Node<K, V>,
@@ -20,7 +21,9 @@ export function modify<K, V>(
       return modifyListNode(node, shift, get, hash, key, size);
     case NodeType.INDEX:
       return modifyIndexedNode(node, shift, get, hash, key, size);
+    case NodeType.COLLISION:
+      return modifyCollisionNode(node, shift, get, hash, key, size);
     default:
-      return node.modify(shift, get, hash, key, size);
+      throw new Error('never');
   }
 }

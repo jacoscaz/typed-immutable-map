@@ -1,17 +1,15 @@
-import {Indexed, ChildrenNodes, Leaf, NodeType} from '../types';
-// import { LeafNode } from './LeafNode';
-import { CollisionNode } from '../CollisionNode';
-import { SIZE, hashFragment, toBitmap } from '../../common';
+import {ChildrenNodes, Collision, Indexed, Leaf, NodeType} from '../types';
+import {hashFragment, SIZE, toBitmap} from '../../common';
 
 export function combineLeafNodes<K, V>(
   shift: number,
   hash1: number,
   leafNode1: Leaf<K, V>,
   hash2: number,
-  leafNode2: Leaf<K, V>): CollisionNode<K, V> | Indexed<K, V>
+  leafNode2: Leaf<K, V>): Collision<K, V> | Indexed<K, V>
 {
   if (hash1 === hash2)
-    return new CollisionNode(hash1, [leafNode2, leafNode1]);
+    return { type: NodeType.COLLISION, hash: hash1, children: [leafNode2, leafNode1] };
 
   const fragment1 = hashFragment(shift, hash1);
   const fragment2 = hashFragment(shift, hash2);
