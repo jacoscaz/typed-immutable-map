@@ -17,27 +17,28 @@ Features:
   so that they can be imported separately for smaller bundles
 - zero dependencies
 
-## Let me have it!
+## API
 
-All methods and classes can be imported separately as follows: 
+All methods and classes can be imported separately as follows:
 
 ```typescript
 import { fromObject } from 'typed-immutable-map/dist/HashMap/from';
 import { get } from 'typed-immutable-map/dist/HashMap/get';
 ```
 
-## API
-
-import { empty } from '@typed/hashmap';
+```javascript
+const { fromObject } = require('typed-immutable-map/dist/HashMap/from');
+const { get } = require('typed-immutable-map/dist/HashMap/get');
+```
 
 ### Creating a HashMap
 
-####`empty<K, V>(): HashMap<K, V>`
+#### `empty<K, V>(): HashMap<K, V>`
 
 Creates an empty HashMap that will accept type `K` as keys and `V` as values.
 
 ```typescript
-import { empty } from '@typed/hashmap';
+import { empty } from 'typed-immutable-map';
 
 const map = empty<string, number>();
 ```
@@ -47,7 +48,7 @@ const map = empty<string, number>();
 Creates a HashMap from an object.
 
 ```typescript
-import { fromObject } from '@typed/hashmap';
+import { fromObject } from 'typed-immutable-map';
 
 const map = fromObject<number>({ a: 1, b: 2 });
 ```
@@ -57,7 +58,7 @@ const map = fromObject<number>({ a: 1, b: 2 });
 Creates a HashMap from an array of tuples.
 
 ```typescript
-import { fromArray } from '@typed/hashmap';
+import { fromArray } from 'typed-immutable-map';
 
 const map = fromArray<string, number>([ ['a', 1], ['b', 2] ]);
 ```
@@ -70,7 +71,7 @@ Warning: this method using `Array.from` internally, and will require a polyfill
 if not in an environment that supports this feature.
 
 ```typescript
-import { fromIterable } from '@typed/hashmap';
+import { fromIterable } from 'typed-immutable-map';
 
 const map = fromIterable(someIterable);
 ```
@@ -83,7 +84,7 @@ Returns a new HashMap containing the `key` and `value` passed to `set`.
 This operation is immutable and will not alter the map passed to it.
 
 ```typescript
-import { set, get, empty } from '@typed/hashmap';
+import { set, get, empty } from 'typed-immutable-map';
 
 const map = empty<string, number>();
 
@@ -97,7 +98,7 @@ console.log(get('a', a)) // 1
 Attempts to find a value in a given HashMap. Returns `undefined` if none can be found.
 
 ```typescript
-import { set, get, empty } from '@typed/hashmap';
+import { set, get, empty } from 'typed-immutable-map';
 
 const map = empty<string, number>();
 
@@ -111,7 +112,7 @@ console.log(get('a', a)) // 1
 Returns true if a map contains a particular key and false if it does not.
 
 ```typescript
-import { empty, has, set } from '@typed/hashmap';
+import { empty, has, set } from 'typed-immutable-map';
 
 let map = empty<string, number>();
 map = set('a', 1, map);
@@ -123,7 +124,7 @@ has('a', map) // true
 Returns the number of key value pairs a given map contains
 
 ```typescript
-import { size, empty, fromObject } from '@typed/hashmap';
+import { size, empty, fromObject } from 'typed-immutable-map';
 
 size(empty()) // 0
 size(fromObject({ a: 1, b: 2 })) // 2
@@ -134,14 +135,12 @@ size(fromObject({ a: 1, b: 2 })) // 2
 Returns a HashMap that no longer contains a value for `key`.
 
 ```typescript
-import { remove, fromObject, has } from '@typed/hashmap';
+import { remove, fromObject, has } from 'typed-immutable-map';
 
 const map = fromObject({ a: 1, b: 2, c: 3})
 
-const hasB = has('b')
-
-hasB(map) // true
-hasB(remove('b', map)) // false
+has('b', map) // true
+has('b', remove('b', map)) // false
 ```
 
 #### `entries<K, V>(map: HashMap<K, V>): Iterator<[K, V]>`
@@ -150,7 +149,7 @@ Guaranteeing no order creates an iterator of keys and values held within
 a given HashMap.
 
 ```typescript
-import { entries, fromObject } from '@typed/hashmap';
+import { entries, fromObject } from 'typed-immutable-map';
 
 const map = fromObject({ a: 1, b: 2, c: 3 })
 
@@ -174,7 +173,7 @@ Guaranteeing no order creates an iterator of keys held within
 a given HashMap.
 
 ```typescript
-import { keys, fromArray } from '@typed/hashmap';
+import { keys, fromArray } from 'typed-immutable-map';
 
 const map = fromArray([ ['a', 1], ['b', 2], ['c', 3] ])
 
@@ -192,7 +191,7 @@ Guaranteeing no order creates an iterator of keys held within
 a given HashMap.
 
 ```typescript
-import { keys, fromArray } from '@typed/hashmap';
+import { keys, fromArray } from 'typed-immutable-map';
 
 const map = fromArray([ ['a', 1], ['b', 2], ['c', 3] ])
 
@@ -209,7 +208,7 @@ console.log(iterator.next().value) // null
 Fold over the values held in a HashMap, similar to `Array.prototype.reduce`.
 
 ```typescript
-import { reduce, fromIterable } from '@typed/hashmap';
+import { reduce, fromIterable } from 'typed-immutable-map';
 
 const iterable = new Map([ [1, 1], [2, 2], [3, 3] ]);
 
@@ -226,7 +225,7 @@ Perform side effects on each value contained in a HashMap, returning the origina
 HashMap.
 
 ```typescript
-import { forEach, fromObject } from '@typed/hashmap';
+import { forEach, fromObject } from 'typed-immutable-map';
 
 const map = fromObject({ a: 1, b: 2, c: 3 })
 
@@ -242,7 +241,7 @@ the provided function on each value contained in the given HashMap, similar to
 `Array.prototype.map`.
 
 ```typescript
-import { map, forEach, fromObject } from '@typed/hashmap';
+import { map, forEach, fromObject } from 'typed-immutable-map';
 
 const a = map(x => x + 1, fromObject({ a: 1, b: 2, c: 3 }))
 
@@ -255,7 +254,7 @@ Creates a new HashMap containing only values that return `true` when the predica
 function is called with a given value, similar to `Array.prototype.filter`.
 
 ```typescript
-import { filter, forEach, fromObject } from '@typed/hashmap';
+import { filter, forEach, fromObject } from 'typed-immutable-map';
 
 const a = filter(x => x % 2 === 0, fromObject({ a: 1, b: 2, c: 3 }))
 
