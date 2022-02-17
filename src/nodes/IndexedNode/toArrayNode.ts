@@ -1,11 +1,10 @@
-import { ChildNode, ChildrenNodes } from '../types';
-import { ArrayNode } from '../ArrayNode';
+import {ChildNode, ChildrenNodes, ListNode, NodeType} from '../types';
 
 export function toArrayNode<K, V>(
   fragment: number,
   child: ChildNode<K, V>,
   bitmap: number,
-  children: ChildrenNodes<K, V>)
+  children: ChildrenNodes<K, V>): ListNode<K, V>
 {
   const array: ChildrenNodes<K, V> = [];
   let bit = bitmap;
@@ -19,5 +18,5 @@ export function toArrayNode<K, V>(
 
   array[fragment] = child;
 
-  return new ArrayNode(count + 1, array);
+  return { type: NodeType.ARRAY, size: count + 1, children: array };
 }

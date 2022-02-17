@@ -48,7 +48,7 @@ export interface ListNode<K, V> {
   type: NodeType.ARRAY;
   size: number;
   children: Array<Node<K, V>>;
-  modify: Modify<K, V>;
+  // modify: Modify<K, V>;
 }
 
 export const enum NodeType {

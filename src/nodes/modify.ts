@@ -1,6 +1,7 @@
 import {Node, NodeType} from './types';
 import {modifyLeaf} from './LeafNode';
 import {modifyEmpty} from './EmptyNode';
+import {modifyListNode} from './ArrayNode';
 
 export function modify<K, V>(
   node: Node<K, V>,
@@ -14,6 +15,8 @@ export function modify<K, V>(
       return modifyLeaf(node, shift, get, hash, key, size);
     case NodeType.EMPTY:
       return modifyEmpty(node, shift, get, hash, key, size);
+    case NodeType.ARRAY:
+      return modifyListNode(node, shift, get, hash, key, size);
     default:
       return node.modify(shift, get, hash, key, size);
   }

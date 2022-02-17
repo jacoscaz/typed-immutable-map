@@ -1,5 +1,5 @@
 
-import { Node, NodeType, IndexedNode, ArrayNode, Leaf } from '../../nodes';
+import { Node, NodeType, IndexedNode, ListNode, Leaf } from '../../nodes';
 import { SIZE, hashFragment, toBitmap, bitmapToIndex } from '../../common';
 import { HashMap } from './../HashMap';
 import { getNode } from './getNode';
@@ -54,7 +54,7 @@ export function getHash<K, V, R>(
     }
 
     case NodeType.ARRAY: {
-      node = (node as ArrayNode<K, V>).children[hashFragment(shift, hash)];
+      node = (node as ListNode<K, V>).children[hashFragment(shift, hash)];
 
       if (node) {
         shift += SIZE;
