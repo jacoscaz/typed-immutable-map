@@ -41,7 +41,7 @@ export interface Indexed<K, V> {
   type: NodeType.INDEX;
   mask: number;
   children: ChildrenNodes<K, V>;
-  modify: Modify<K, V>;
+  // modify: Modify<K, V>;
 }
 
 export interface ListNode<K, V> {

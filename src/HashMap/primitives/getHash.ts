@@ -1,5 +1,5 @@
 
-import { Node, NodeType, IndexedNode, ListNode, Leaf } from '../../nodes';
+import { Node, NodeType, Indexed, ListNode, Leaf } from '../../nodes';
 import { SIZE, hashFragment, toBitmap, bitmapToIndex } from '../../common';
 import { HashMap } from './../HashMap';
 import { getNode } from './getNode';
@@ -43,9 +43,9 @@ export function getHash<K, V, R>(
       const fragment = hashFragment(shift, hash);
       const bit = toBitmap(fragment);
 
-      if ((node as IndexedNode<K, V>).mask & bit) {
-        const i = bitmapToIndex((node as IndexedNode<K, V>).mask, bit);
-        node = (node as IndexedNode<K, V>).children[i];
+      if ((node as Indexed<K, V>).mask & bit) {
+        const i = bitmapToIndex((node as Indexed<K, V>).mask, bit);
+        node = (node as Indexed<K, V>).children[i];
         shift += SIZE;
         break;
       }

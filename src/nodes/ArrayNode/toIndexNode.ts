@@ -1,10 +1,9 @@
-import { NodeType, Node } from '../types';
-import { IndexedNode } from '../IndexedNode';
+import {Indexed, Node, NodeType} from '../types';
 
 export function toIndexNode<K, V>(
   count: number,
   index: number,
-  children: Array<Node<K, V>>): IndexedNode<K, V>
+  children: Array<Node<K, V>>): Indexed<K, V>
 {
   const newChildren = new Array(count - 1);
   let g = 0;
@@ -19,5 +18,5 @@ export function toIndexNode<K, V>(
     }
   }
 
-  return new IndexedNode<K, V>(bitmap, newChildren);
+  return { type: NodeType.INDEX, mask: bitmap, children: newChildren };
 }
