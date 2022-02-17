@@ -1,31 +1,34 @@
-# @typed/hashmap
+# typed-immutable-map
 
 > Immutable HashMap for TypeScript
 
 A fast and persistent (immutable) Hash Array Map Trie for TypeScript.
 
-This is heavily based off of [hamt](https://github.com/mattbierner/hamt) and
-was mainly done by me for learning purposes, but it is likely very useful, and I
-plan to use it as well.
+This is heavily based off of the deprecated [@typed/hashmap][1], which in turn
+was based off of [hamt][2].
 
-Once main difference to the hamt library is that keys can be of any type
-including objects or arrays much like ES2015 `Map`s.
-Another notable change is there are **not** prototype methods to allow
-for ES2015 modules to be tree-shaken for smaller builds :fire:
+[1]: https://github.com/TylorS/typed-hashmap
+[2]: https://github.com/mattbierner/hamt
 
-There is a heavy emphasis on typing this library, and it's highly recommended
-to be used with TypeScript to reap the full benefits of type guarantees.
+Features: 
 
-There is more to be done but the bare minimum is definitely present.
+- keys can be of any type, including objects or arrays, much like ES2015 `Map`s
+- all methods are implemented as static methods, with zero usage of prototypes, 
+  so that they can be imported separately for smaller bundles
+- zero dependencies
 
 ## Let me have it!
-```sh
-npm install --save @typed/hashmap
+
+All methods and classes can be imported separately as follows: 
+
+```typescript
+import { fromObject } from 'typed-immutable-map/dist/HashMap/from';
+import { get } from 'typed-immutable-map/dist/HashMap/get';
 ```
 
 ## API
 
-All multi-parameter functions are curried!
+import { empty } from '@typed/hashmap';
 
 ### Creating a HashMap
 

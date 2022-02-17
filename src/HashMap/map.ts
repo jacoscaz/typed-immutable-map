@@ -1,10 +1,9 @@
 import { HashMap } from './HashMap';
-import { curry2 } from '@typed/curry';
 import { empty } from './empty';
 import { reduce } from './reduce';
 import { set } from './set';
 
-export const map: MapFn = curry2(function map<K, V, R>(
+export const map: MapFn = function map<K, V, R>(
   f: (value: V, key?: K) => R,
   hashmap: HashMap<K, V>): HashMap<K, R>
 {
@@ -15,10 +14,8 @@ export const map: MapFn = curry2(function map<K, V, R>(
     empty<K, R>(),
     hashmap,
   );
-});
+};
 
 export interface MapFn {
   <K, V, R>(f: (value: V, key?: K) => R, map: HashMap<K, V>): HashMap<K, R>;
-
-  <K, V, R>(f: (value: V, key?: K) => R): (map: HashMap<K, V>) => HashMap<K, R>;
 }

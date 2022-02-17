@@ -3,7 +3,7 @@ import { NodeType } from '../../nodes';
 import { getNode } from './getNode';
 
 export function fold<K, V, R>(
-  f: (accum: R, value: V, key?: K) => R,
+  f: (accum: R, value: V, key: K) => R,
   seed: R,
   map: HashMap<K, V>): R
 {

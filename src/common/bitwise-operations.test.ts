@@ -1,4 +1,4 @@
-import { eq } from '@briancavalier/assert';
+import { deepStrictEqual as eq }  from 'assert';
 import { MASK } from './constants';
 import {
   hammingWeight, hashFragment,

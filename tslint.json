@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "@motorcycle/tslint"
-  ],
-  "rules": {
-    "no-bitwise": false,
-    "no-use-before-declare": false
-  }
-}
