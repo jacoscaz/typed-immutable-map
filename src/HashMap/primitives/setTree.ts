@@ -11,5 +11,5 @@ export function setTree<K, V>(node: Node<K, V>, size: number, map: HashMap<K, V>
   // use type casting to keep node private on HashMap
   return node === getNode<K, V>(map)
     ? map
-    : new HashMap(node, size);
+    : { node, size };
 }
