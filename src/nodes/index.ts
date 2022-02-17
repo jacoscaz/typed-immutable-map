@@ -5,3 +5,4 @@ export * from './ArrayNode';
 export * from './CollisionNode';
 export * from './IndexedNode';
 export * from './LeafNode';
+export * from './modify';

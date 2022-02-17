@@ -19,7 +19,7 @@ export type ChildrenNodes<K, V> = Array<ChildNode<K, V>>;
 
 export interface Empty<K, V> {
   type: NodeType.EMPTY;
-  modify: Modify<K, V>;
+  // modify: Modify<K, V>;
 }
 
 export interface Leaf<K, V> {

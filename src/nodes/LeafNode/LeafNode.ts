@@ -47,7 +47,7 @@ import { combineLeafNodes } from './combineLeafNodes';
 //   }
 // }
 
-export function modifyLeafNode<K, V>(
+export function modifyLeaf<K, V>(
   node: Leaf<K, V>,
   shift: number,
   get: (value?: V) => V,
@@ -77,19 +77,4 @@ if (value === NOTHING)
 ++size.value;
 
 return combineLeafNodes(shift, node.hash, node, hash, { type: NodeType.LEAF, hash, key, value });
-}
-
-export function modifyNode<K, V>(
-  node: Node<K, V>,
-  shift: number,
-  get: (value?: V) => V,
-  hash: number,
-  key: K,
-  size: { value: number }): Node<K, V> {
-  switch (node.type) {
-    case NodeType.LEAF:
-      return modifyLeafNode(node, shift, get, hash, key, size);
-    default:
-      return node.modify(shift, get, hash, key, size);
-  }
 }
