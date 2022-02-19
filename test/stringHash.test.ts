@@ -1,5 +1,5 @@
 import { deepStrictEqual as eq } from 'assert';
-import { stringHash } from './stringHash';
+import { stringHash } from '../src/common/stringHash';
 
 describe('hashGenerator', () => {
   it('generates 32 bit hash from string', () => {

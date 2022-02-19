@@ -1,8 +1,8 @@
 import { deepStrictEqual as eq }  from 'assert';
-import { MASK } from './constants';
+import { MASK } from '../src/common/constants';
 import {
   hammingWeight, hashFragment,
-  toBitmap, bitmapToIndex } from './bitwise-operations';
+  toBitmap, bitmapToIndex } from '../src/common/bitwise-operations';
 
 describe('hammingWeight', () => {
   it('returns the hamming weight of a number', () => {
