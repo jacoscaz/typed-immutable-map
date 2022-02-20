@@ -263,3 +263,27 @@ const a = filter(x => x % 2 === 0, fromObject({ a: 1, b: 2, c: 3 }))
 
 forEach((value, key) => console.log(value, key), a) // 'b' 2
 ```
+
+#### `toObject<K, V>(map: HashMap<K, V>): Record<K, V>`
+
+Converts the map to a plain old object.
+
+```typescript
+import { toObject, fromObject } from 'typed-immutable-map';
+
+const map = fromObject({ a: 1, b: 2, c: 3 });
+const obj = toObject(map);  // { a: 1, b: 2, c: 3 }
+```
+
+If `K` extends `string | number | symbol`, the returned object will be typed
+`Record<K, V>`. Otherwise, it will be typed `Record<string, V>`.
+
+The full signature for this function is as follows:
+
+```typescript
+export interface ToObjectFn {
+  <K extends string | number | symbol, V>(map: HashMap<K, V>): Record<K, V>;
+  <K, V>(map: HashMap<K, V>): Record<string, V>;
+}
+```
+ 

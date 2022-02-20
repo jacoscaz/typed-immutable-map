@@ -1,6 +1,7 @@
 import {
   deepStrictEqual,
   strictEqual,
+  notStrictEqual,
 } from 'assert';
 
 import {
@@ -16,6 +17,7 @@ import {
   forEach,
   has,
   map as mapmap,
+  filter,
   reduce,
   remove,
   size,
@@ -23,6 +25,24 @@ import {
 } from '../src/HashMap';
 
 describe('HashMap', () => {
+
+  describe('toObject()', () => {
+    it('should return an object that includes all entries', () => {
+      let map = empty();
+      map = set('a', 1, map);
+      map = set('b', 2, map);
+      map = set('c', 3, map);
+      deepStrictEqual(toObject(map), { a: 1, b: 2, c: 3 });
+    });
+    it('should not loose typings when using object-compatible keys', () => {
+      // This is a typings test. If something breaks, TypeScript will refuse to
+      // compile this file.
+      type KeyType = 'foo' | 'bar';
+      type ValueType = any;
+      const map = empty<KeyType, ValueType>();
+      const obj: Record<KeyType, ValueType> = toObject(map);
+    });
+  });
 
   describe('fromObject()', () => {
     it('should create a map that includes all properties', () => {
@@ -61,6 +81,11 @@ describe('HashMap', () => {
   });
 
   describe('set()', () => {
+    it('should return a new HashMap', () => {
+      const o = empty<string, number>();
+      const n = set('a', 1, o);
+      notStrictEqual(o, n);
+    });
     it('should set the value for a given key', () => {
       let map = fromObject<string, number>({ a: 1, b: 2 });
       strictEqual(get('c', map), undefined);
@@ -70,6 +95,11 @@ describe('HashMap', () => {
   });
 
   describe('remove()', () => {
+    it('should return a new HashMap', () => {
+      const o = fromObject({ a: 1, b: 2, c: 3 });
+      const n = remove('a', o);
+      notStrictEqual(o, n);
+    });
     it('should remove the value for a given key', () => {
       let map = fromObject<string, number>({ a: 1, b: 2, c: 3 });
       strictEqual(get('c', map), 3);
@@ -134,10 +164,20 @@ describe('HashMap', () => {
   });
 
   describe('map()', () => {
-    it('should map all values', () => {
-      let map = fromObject<string, number>({ a: 1, b: 2, c: 3 });
-      map = mapmap((v, k) => v * 2, map);
-      deepStrictEqual(toObject(map), { a: 2, b: 4, c: 6 });
+    it('should map all values into a new hashmap', () => {
+      const o = fromObject<string, number>({ a: 1, b: 2, c: 3 });
+      const n = mapmap((v, k) => v * 2, o);
+      notStrictEqual(o, n);
+      deepStrictEqual(toObject(n), { a: 2, b: 4, c: 6 });
+    });
+  });
+
+  describe('filter()', () => {
+    it('should filter all values into a new hashmap', () => {
+      const o = fromObject<string, number>({ a: 1, b: 2, c: 3 });
+      const n = filter((v, k) => v % 2 === 0, o);
+      notStrictEqual(o, n);
+      deepStrictEqual(toObject(n), { b: 2 });
     });
   });
 
