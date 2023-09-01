@@ -19,5 +19,5 @@ export const filter: FilterFn = function filter<K, V>(
 };
 
 export interface FilterFn {
-  <K, V>(predicate: (value: V, key?: K) => boolean, hashmap: HashMap<K, V>): HashMap<K, V>;
+  <K, V>(predicate: (value: V, key: K) => boolean, hashmap: HashMap<K, V>): HashMap<K, V>;
 }

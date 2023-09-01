@@ -4,7 +4,7 @@ import { reduce } from './reduce';
 import { set } from './set';
 
 export const map: MapFn = function map<K, V, R>(
-  f: (value: V, key?: K) => R,
+  f: (value: V, key: K) => R,
   hashmap: HashMap<K, V>): HashMap<K, R>
 {
   return reduce(
@@ -17,5 +17,5 @@ export const map: MapFn = function map<K, V, R>(
 };
 
 export interface MapFn {
-  <K, V, R>(f: (value: V, key?: K) => R, map: HashMap<K, V>): HashMap<K, R>;
+  <K, V, R>(f: (value: V, key: K) => R, map: HashMap<K, V>): HashMap<K, R>;
 }
